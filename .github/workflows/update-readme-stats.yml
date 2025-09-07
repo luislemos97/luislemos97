@@ -2,27 +2,30 @@ name: Update README stats
 
 on:
   schedule:
-    - cron: "0 0 * * *" # roda todo dia à meia-noite
-  workflow_dispatch: # permite rodar manualmente
+    - cron: "0 0 * * *" # roda todo dia à 00:00 UTC
+  workflow_dispatch:   # permite rodar manualmente
+
+permissions:
+  contents: write
 
 jobs:
   update-readme:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "18"
 
-      - name: Install dependencies
-        run: npm install node-fetch@2
-
       - name: Run update script
-        run: node update-readme.js
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          node --version
+          node update-readme.js
 
       - name: Commit changes
         run: |
@@ -31,9 +34,3 @@ jobs:
           git add README.md
           git commit -m "chore: update README stats" || echo "No changes to commit"
           git push
-
-      - name: Run update script
-        run: node update-readme.js
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-

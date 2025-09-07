@@ -1,90 +1,39 @@
 name: Update README stats
+
 on:
   schedule:
-    - cron: '0 7 * * *'   # roda todo dia às 07:00 UTC
-  workflow_dispatch:       # permite rodar manualmente
-
-permissions:
-  contents: write
+    - cron: "0 0 * * *" # roda todo dia à meia-noite
+  workflow_dispatch: # permite rodar manualmente
 
 jobs:
   update-readme:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
-      - name: Update README with GitHub stats
-        uses: actions/github-script@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          script: |
-            const owner = context.repo.owner;
-            const repo = context.repo.repo;
-            const login = owner;
+          node-version: "18"
 
-            const now = new Date();
-            const from = new Date(now.getFullYear(), 0, 1).toISOString();
-            const to = new Date(now.getFullYear(), 11, 31, 23, 59, 59).toISOString();
+      - name: Install dependencies
+        run: npm install node-fetch@2
 
-            const q = `
-              query($login:String!, $from:DateTime!, $to:DateTime!) {
-                user(login:$login) {
-                  contributionsCollection(from:$from, to:$to) {
-                    totalCommitContributions
-                    totalIssueContributions
-                    totalPullRequestContributions
-                    contributionCalendar { totalContributions }
-                  }
-                }
-              }
-            `;
-            const resp = await github.graphql(q, { login, from, to });
-            const cc = resp.user.contributionsCollection;
-            const commits = cc.totalCommitContributions || 0;
-            const prs = cc.totalPullRequestContributions || 0;
-            const issues = cc.totalIssueContributions || 0;
-            const contributedLastYear = cc.contributionCalendar?.totalContributions || 0;
+      - name: Run update script
+        run: node update-readme.js
 
-            const repos = await github.paginate("GET /users/{username}/repos", { username: login, per_page: 100 });
-            const totalStars = repos.reduce((s, r) => s + (r.stargazers_count || 0), 0);
+      - name: Commit changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "chore: update README stats" || echo "No changes to commit"
+          git push
 
-            const path = 'README.md';
-            const contentResp = await github.repos.getContent({ owner, repo, path });
-            const buff = Buffer.from(contentResp.data.content, 'base64').toString('utf8');
+      - name: Run update script
+        run: node update-readme.js
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
-            const startTag = '<!-- STATS-START -->';
-            const endTag = '<!-- STATS-END -->';
-
-            if (!buff.includes(startTag) || !buff.includes(endTag)) {
-              core.setFailed('README.md não tem os marcadores <!-- STATS-START --> e <!-- STATS-END -->');
-              return;
-            }
-
-            const before = buff.split(startTag)[0];
-            const after = buff.split(endTag)[1];
-
-            const newStats = `
-${startTag}
-**📊 GitHub Stats (auto atualizados)**
-
-- **Total commits (este ano):** ${commits}
-- **Total PRs (este ano):** ${prs}
-- **Total Issues (este ano):** ${issues}
-- **Total stars (todos os repositórios):** ${totalStars}
-- **Contributed (last year):** ${contributedLastYear}
-
-${endTag}
-`;
-
-            const newReadme = before + newStats + after;
-
-            await github.repos.createOrUpdateFileContents({
-              owner,
-              repo,
-              path,
-              message: 'chore: atualizar estatísticas do README',
-              content: Buffer.from(newReadme, 'utf8').toString('base64'),
-              sha: contentResp.data.sha
-            });
-
-            console.log('README atualizado com sucesso');

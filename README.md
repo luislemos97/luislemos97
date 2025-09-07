@@ -3,20 +3,47 @@
 - 🌱 Estou estudando TDD, SOLID e DDD
 
 <div align="center">
-  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=luislemos97&show_icons=true&theme=dracula&include_all_commits=true&count_private=false"/>
+  
+  <!-- Estatísticas gerais -->
+  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=luislemos97&show_icons=true&theme=dracula&include_all_commits=true&count_private=true"/>
+  
+  <!-- Linguagens mais usadas -->
   <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=luislemos97&layout=compact&langs_count=7&theme=dracula"/>
+
+  <!-- Streak (dias de contribuição seguidos) -->
+  <img height="180em" src="https://github-readme-streak-stats.herokuapp.com?user=luislemos97&theme=dracula&date_format=j%20M%5B%20Y%5D"/>
+
 </div>
 
-<!-- STATS-START -->
-**📊 GitHub Stats (auto atualizados)**
+---
 
-- **Total commits (este ano):** _aqui o Action vai colocar um número_
-- **Total PRs (este ano):** _número_
-- **Total Issues (este ano):** _número_
-- **Total stars (todos os repositórios):** _número_
-- **Contributed (last year):** _número_
-<!-- STATS-END -->
+## 🏆 Troféus (Achievements)
+<p align="center">
+  <img src="https://github-profile-trophy.vercel.app/?username=luislemos97&theme=dracula&no-frame=true&row=1&column=6" />
+</p>
 
+---
+
+## 🚀 Estatísticas específicas
+<div align="center">
+  
+  <!-- Commits -->
+  <img src="https://badges.pufler.dev/commits/monthly/luislemos97?color=red&label=Commits%20(mês)&logo=github" />
+
+  <!-- Pull Requests -->
+  <img src="https://img.shields.io/badge/PRs-Ativos-blue?logo=github" />
+
+  <!-- Issues -->
+  <img src="https://img.shields.io/badge/Issues-Abertos-green?logo=github" />
+
+  <!-- Stars -->
+  <img src="https://img.shields.io/github/stars/luislemos97?style=flat&logo=github&color=yellow" />
+
+</div>
+
+---
+
+## 💻 Tecnologias que uso
 <div style="display: inline_block"><br>
   <img align="center" alt="Luis-Java" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-plain.svg">
   <img align="center" alt="Luis-Csharp" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg">
@@ -41,8 +68,9 @@
   <img align="center" alt="Luis-yaml" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/yaml/yaml-original.svg">
 </div>
 
-##
+---
 
+## 📫 Contato
 <div>
  <a href = "mailto:luislemosm12@gmail.com"><img src="https://img.shields.io/badge/-Gmail-%23333?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
  <a href="https://www.linkedin.com/in/luis-lemos97/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>

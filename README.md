@@ -130,18 +130,20 @@
 
 
 
+
 <!--START_SECTION:stats-->
 <div align="center">
 
-![Commits](https://img.shields.io/badge/Commits-35-red?logo=github)
+![Commits](https://img.shields.io/badge/Commits-0-red?logo=github)
 ![Pull Requests](https://img.shields.io/badge/PRs-0-blue?logo=github)
 ![Issues](https://img.shields.io/badge/Issues-0-green?logo=github)
 ![Stars](https://img.shields.io/badge/Stars-12-yellow?logo=github)
 
-**Contributions this year:** 172
+**Contributions this year:** 0
 
 </div>
 <!--END_SECTION:stats-->
+
 
 
 
